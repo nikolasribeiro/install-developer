@@ -6,6 +6,8 @@ distribucion linux.
 import os
 import sys
 import time
+os.system("pip3 install termcolor")
+
 from termcolor import colored, cprint
 
 #os.popen(comando linux).read(), ejecuta un comando en terminal y almacena
