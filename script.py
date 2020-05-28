@@ -6,7 +6,6 @@ distribucion linux.
 import os
 import sys
 import time
-from selenium import webdriver
 from termcolor import colored, cprint
 
 #os.popen(comando linux).read(), ejecuta un comando en terminal y almacena
