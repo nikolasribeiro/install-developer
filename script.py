@@ -6,7 +6,9 @@ distribucion linux.
 import os
 import sys
 import time
+
 os.system("pip3 install termcolor")
+time.sleep(5)
 
 from termcolor import colored, cprint
 
@@ -33,7 +35,7 @@ def crear_carpetas(nombre):
             os.system("cp -r {0}  /home/{1}".format(nombre, os.popen("whoami").read() ) )
             os.system("rmdir {}".format(nombre))
 
-    if nombre in folders[1:-1]:
+    if nombre in folders[1:]:
         if os.path.exists(PROJECTS_PATH + "{}".format(nombre)):
             print( pintar_texto("La carpeta {} ya existe...".format(nombre), "red") )
         else:
