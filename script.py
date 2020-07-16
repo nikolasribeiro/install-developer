@@ -21,7 +21,7 @@ except:
 #el resultado en una variable
 
 comandos_primarios  = ["update","upgrade","dist-upgrade"]
-dependencias        = ["virtualenv","neofetch","cmatrix","vim","emacs","htop","openssh-server","openssh-client","apache2","python3-pyqt5"]
+dependencias        = ["virtualenv","neofetch","cmatrix","vim","emacs","htop","openssh-server","openssh-client","apache2","python3-pyqt5", "pyqt5-dev-tools", "qttools5-dev-tools"]
 dependencias_python = ["pdfkit","wkhtmltopdf"]
 folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
 proyectos_gitHUB    = ["SILISv4", "creacion","curso_web"]
