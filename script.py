@@ -22,7 +22,7 @@ except:
 
 comandos_primarios  = ["update","upgrade","dist-upgrade"]
 dependencias        = ["virtualenv","neofetch","cmatrix","vim","emacs","htop","openssh-server","openssh-client","apache2","python3-pyqt5", "pyqt5-dev-tools", "qttools5-dev-tools"]
-dependencias_python = ["pdfkit","wkhtmltopdf"]
+dependencias_pip    = ["pdfkit","wkhtmltopdf"]
 folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
 proyectos_gitHUB    = ["SILISv4", "creacion","curso_web"]
 proyectos_gitLAB    = [""]
@@ -43,11 +43,6 @@ def importar_proyectos(proyecto):
         else:
             print( pintar_texto(f"~~ Descargando: {proyecto}", color="green") )
             os.system(f"git clone {GIT_USER}{proyecto} {PROJECTS_PATH}Proyectos/{proyecto}")
-        
-        
-    
-
-
 
 def pintar_texto(texto, color="white"):
     return colored(texto, color)
@@ -96,8 +91,8 @@ def main():
     for dependencia in dependencias:
         instalar_dependencia(dependencia)
 
-    for python_pip in dependencias_python:
-        instalar_dependencias_pip(python_pip)
+    for pip in dependencias_pip:
+        instalar_dependencias_pip(pip)
 
     for proyecto in proyectos_gitHUB:
         importar_proyectos(proyecto)
