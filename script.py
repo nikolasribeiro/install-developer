@@ -88,8 +88,13 @@ def main():
     
     for carpeta in folders:
         crear_carpetas(carpeta)
+
     for dependencia in dependencias:
         instalar_dependencia(dependencia)
+
+    for proyecto in proyectos_gitHUB:
+        importar_proyectos(proyecto)
+    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )
 
     print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )    
 
@@ -101,8 +106,8 @@ def test():
 
 
 if __name__ == "__main__":
-    #main()
-    test()
+    main()
+    #test()
 
 
 
