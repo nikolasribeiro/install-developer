@@ -7,23 +7,50 @@ import os
 import sys
 import time
 
-os.system("pip3 install termcolor")
-time.sleep(5)
+try:
+    from termcolor import colored, cprint
+except:
+    print("...::: No se encontro la dependencia TERMCOLOR, el programa procedera a instalarlo a continuacion :::...")
+    os.system("sudo apt install python3-pip")
+    os.system("pip3 install termcolor")
+    time.sleep(5)
+    print("---=== TERMCOLOR INSTALADO ===---")
 
-from termcolor import colored, cprint
 
 #os.popen(comando linux).read(), ejecuta un comando en terminal y almacena
 #el resultado en una variable
 
 comandos_primarios  = ["update","upgrade","dist-upgrade"]
-dependencias        = ["virtualenv","neofetch","cmatrix","vim","emacs"]
-folders             = ["custom_path","Proyectos","Sandbox"]
+dependencias        = ["virtualenv","neofetch","cmatrix","vim","emacs","htop","openssh-server","openssh-client","apache2","python3-pyqt5"]
+dependencias_python = ["pdfkit","wkhtmltopdf"]
+folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
+proyectos_gitHUB    = ["SILISv4", "creacion","curso_web"]
+proyectos_gitLAB    = [""]
 PROJECTS_PATH       = "/home/nicolas/Documentos/"
+GIT_USER            = "https://github.com/nikolasribeiro/"
+
+def importar_proyectos(proyecto):
+
+    if os.path.exists(f"/home/nicolas/Documentos/Proyectos/{proyecto}") or os.path.exists(f"/home/nicolas/Documentos/Estudios/{proyecto}"):
+
+        print( pintar_texto(f"~~ El Proyecto {proyecto} ya existe.", color="red") )
+
+    else:
+
+        if proyecto == "curso_web":
+            print( pintar_texto(f"~~ Descargando: {proyecto}", color="green") )
+            os.system(f"git clone {GIT_USER}{proyecto} {PROJECTS_PATH}Estudios/{proyecto}")
+        else:
+            print( pintar_texto(f"~~ Descargando: {proyecto}", color="green") )
+            os.system(f"git clone {GIT_USER}{proyecto} {PROJECTS_PATH}Proyectos/{proyecto}")
+        
+        
+    
+
 
 
 def pintar_texto(texto, color="white"):
     return colored(texto, color)
-
 
 def crear_carpetas(nombre):
     if nombre == folders[0]:
@@ -44,11 +71,9 @@ def crear_carpetas(nombre):
             os.system("cp -r {0} {1}".format(nombre, PROJECTS_PATH ) )
             os.system("rmdir {}".format(nombre))
 
-
 def instalar_dependencia(nombre_dependencia):
     print( pintar_texto("....:::: Instalando Dependencia: {}".format(colored(nombre_dependencia, 'yellow')), 'green') )
     os.system("sudo apt install {} -y".format(nombre_dependencia))
-
 
 def actualizar_sistema():
     for comando in comandos_primarios:
@@ -69,9 +94,15 @@ def main():
     print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )    
 
 
+def test():
+    for proyecto in proyectos_gitHUB:
+        importar_proyectos(proyecto)
+    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )
+
 
 if __name__ == "__main__":
-    main()
+    #main()
+    test()
 
 
 
