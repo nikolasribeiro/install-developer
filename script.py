@@ -75,6 +75,10 @@ def instalar_dependencia(nombre_dependencia):
     print( pintar_texto("....:::: Instalando Dependencia: {}".format(colored(nombre_dependencia, 'yellow')), 'green') )
     os.system("sudo apt install {} -y".format(nombre_dependencia))
 
+def instalar_dependencias_pip(dependencia):
+    print( pintar_texto("....:::: Instalando Dependencia PIP: {}".format(colored(dependencia, 'yellow')), 'green') )
+    os.system("pip3 install {}".format(dependencia))
+
 def actualizar_sistema():
     for comando in comandos_primarios:
         os.system("sudo apt {} -y".format(comando))
@@ -91,6 +95,9 @@ def main():
 
     for dependencia in dependencias:
         instalar_dependencia(dependencia)
+
+    for python_pip in dependencias_python:
+        instalar_dependencias_pip(python_pip)
 
     for proyecto in proyectos_gitHUB:
         importar_proyectos(proyecto)
