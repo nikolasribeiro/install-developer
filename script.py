@@ -11,7 +11,7 @@ try:
     from termcolor import colored, cprint
 except:
     print("...::: No se encontro la dependencia TERMCOLOR, el programa procedera a instalarlo a continuacion :::...")
-    os.system("sudo apt install python3-pip")
+    os.system("sudo apt install python3-pip -y")
     os.system("pip3 install termcolor")
     time.sleep(5)
     print("---=== TERMCOLOR INSTALADO ===---")
