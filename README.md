@@ -1,4 +1,7 @@
 # install-developer
+
+<img src="img/install-developer.png" alt="Install developer terminal" />
+
 Instala el entorno de desarrollo automaticamente en cualquier distribucion linux en base a Debian.
 
 Para añadir mas programas o dependencias pip para instalar automaticamente, se añade a la lista dentro del codigo el nombre del paquete.
