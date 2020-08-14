@@ -50,7 +50,7 @@ def pintar_texto(texto, color="white"):
 
 def importar_proyectos(proyecto):
 
-    if os.path.exists(f"/home/nicolas/Documentos/Proyectos/{proyecto}") or os.path.exists(f"/home/nicolas/Documentos/Estudios/{proyecto}"):
+    if os.path.exists(f"/home/{NAME_USER}/Documentos/Proyectos/{proyecto}") or os.path.exists(f"/home/{NAME_USER}/Documentos/Estudios/{proyecto}"):
         print( pintar_texto(f"~~ El Proyecto {proyecto} ya existe.", color="red") )
     else:
         if proyecto == "curso_web":
