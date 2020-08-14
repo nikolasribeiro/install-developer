@@ -6,8 +6,6 @@ distribucion linux.
 import os
 import sys
 import time
-#tests
-import subprocess
 import getpass
 
 try:
@@ -116,18 +114,11 @@ def main():
     print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )    
 
 
-def test():
-    nombre = getpass.getuser()
-    print(nombre+"otro texto encadenado")
-    print(type(nombre))
-    
-
-
 
 
 if __name__ == "__main__":
     main()
-    #test()
+    
 
 
 
