@@ -15,6 +15,7 @@ except:
     os.system("sudo apt install python3-pip -y")
     os.system("pip3 install termcolor")
     print("---=== TERMCOLOR INSTALADO ===---")
+    os.system("python3 script.py")
 
 
 #os.popen(comando linux).read(), ejecuta un comando en terminal y almacena
@@ -61,16 +62,16 @@ def importar_proyectos(proyecto):
             os.system(f"git clone {GIT_USER}{proyecto} {PROJECTS_PATH}Proyectos/{proyecto}")
 
 def crear_carpetas(nombre):
-    if nombre == folders[0]:
-        if os.path.exists(PROJECTS_PATH):
+    
+    if nombre == "custom_path":
+        if os.path.exists(f"/home/{NAME_USER}"):
             print( pintar_texto(f"La carpeta {nombre} ya existe...", "red") )
         else:
             print( pintar_texto(f"Creando carpeta: {nombre}", 'green') )
             os.system(f"mkdir {nombre}")
             os.system(f"cp -r {nombre}  /home/{NAME_USER}" )
             os.system(f"rmdir {nombre}")
-
-    if nombre in folders[1:]:
+    else:
         if os.path.exists(PROJECTS_PATH + nombre):
             print( pintar_texto(f"La carpeta {nombre} ya existe...", "red") )
         else:
