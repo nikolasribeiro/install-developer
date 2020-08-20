@@ -39,8 +39,9 @@ dependencias        = [
     ]
 
 dependencias_pip    = ["pdfkit","wkhtmltopdf"]
+dependencias_snap   = ["flutter"]
 folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
-proyectos_gitHUB    = ["SILISv4", "creacion","curso_web"]
+proyectos_gitHUB    = ["SILISv4", "creacion","curso_web", "curso_flutter","porfolio", "inmobiliaria","covid-tracker"]
 proyectos_gitLAB    = ["Clicker"]
 NAME_USER           = getpass.getuser()
 PROJECTS_PATH       = f"/home/{NAME_USER}/Documentos/"
@@ -54,7 +55,7 @@ def importar_proyectos(proyecto):
     if os.path.exists(f"/home/{NAME_USER}/Documentos/Proyectos/{proyecto}") or os.path.exists(f"/home/{NAME_USER}/Documentos/Estudios/{proyecto}"):
         print( pintar_texto(f"~~ El Proyecto {proyecto} ya existe.", color="red") )
     else:
-        if proyecto == "curso_web":
+        if proyecto in ["curso_web","curso_flutter"]:
             print( pintar_texto(f"~~ Descargando: {proyecto}", color="green") )
             os.system(f"git clone {GIT_USER}{proyecto} {PROJECTS_PATH}Estudios/{proyecto}")
         else:
@@ -64,7 +65,7 @@ def importar_proyectos(proyecto):
 def crear_carpetas(nombre):
     
     if nombre == "custom_path":
-        if os.path.exists(f"/home/{NAME_USER}"):
+        if os.path.exists(f"/home/{NAME_USER}/custom_path"):
             print( pintar_texto(f"La carpeta {nombre} ya existe...", "red") )
         else:
             print( pintar_texto(f"Creando carpeta: {nombre}", 'green') )
@@ -88,9 +89,18 @@ def instalar_dependencias_pip(dependencia):
     print( pintar_texto(f"....:::: Instalando Dependencia PIP: { colored(dependencia, 'yellow') }", 'green') )
     os.system(f"pip3 install {dependencia}")
 
+def instalar_dependencia_snap(nombre_dependencia_snap):
+    print( pintar_texto(f"....:::: Instalando Dependencia Snap: { colored(nombre_dependencia_snap, 'yellow')}", 'green') )
+    if nombre_dependencia_snap == "flutter":
+        os.system(f"sudo snap install {nombre_dependencia_snap} --classic")
+    else:
+        os.system(f"sudo snap install {nombre_dependencia_snap}")
+
 def actualizar_sistema():
     for comando in comandos_primarios:
         os.system(f"sudo apt {comando} -y")
+    print( pintar_texto(f"....:::: Removiendo dependencias obsoletas...", "green") )
+    os.system("sudo apt autoremove -y")
 
 def main():
     print( pintar_texto("....:::: Actualizando el sistema ::::....", 'yellow') )
@@ -104,14 +114,18 @@ def main():
 
     for dependencia in dependencias:
         instalar_dependencia(dependencia)
-
+    
+    for snap_program in dependencias_snap:
+        instalar_dependencia_snap(snap_program)
+    
     for pip in dependencias_pip:
         instalar_dependencias_pip(pip)
-
+    
     for proyecto in proyectos_gitHUB:
         importar_proyectos(proyecto)
-    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )
 
+    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )
+    
     print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )    
 
 
@@ -119,6 +133,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
     
 
 
