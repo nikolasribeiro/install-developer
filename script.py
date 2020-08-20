@@ -35,7 +35,8 @@ dependencias        = [
     "python3-pyqt5", 
     "pyqt5-dev-tools", 
     "qttools5-dev-tools",
-    "nodejs"
+    "nodejs",
+    "snapd"
     ]
 
 dependencias_pip    = ["pdfkit","wkhtmltopdf"]
