@@ -41,7 +41,18 @@ dependencias        = [
 dependencias_pip    = ["pdfkit","wkhtmltopdf"]
 dependencias_snap   = ["flutter"]
 folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
-proyectos_gitHUB    = ["SILISv4", "creacion","curso_web", "curso_flutter","porfolio", "inmobiliaria","covid-tracker"]
+proyectos_gitHUB    = [
+    "SILISv4", 
+    "creacion",
+    "curso_web",                            #Estudio 
+    "curso_flutter",                        #Estudio
+    "porfolio", 
+    "inmobiliaria",
+    "covid-tracker",
+    "holbertonschool-zero_day",             #Estudio
+    "holberton-system_engineering-devops"   #Estudio
+    ]
+
 proyectos_gitLAB    = ["Clicker"]
 NAME_USER           = getpass.getuser()
 PROJECTS_PATH       = f"/home/{NAME_USER}/Documentos/"
@@ -55,7 +66,7 @@ def importar_proyectos(proyecto):
     if os.path.exists(f"/home/{NAME_USER}/Documentos/Proyectos/{proyecto}") or os.path.exists(f"/home/{NAME_USER}/Documentos/Estudios/{proyecto}"):
         print( pintar_texto(f"~~ El Proyecto {proyecto} ya existe.", color="red") )
     else:
-        if proyecto in ["curso_web","curso_flutter"]:
+        if proyecto in ["curso_web", "curso_flutter", "holbertonschool-zero_day", "holberton-system_engineering-devops"]:
             print( pintar_texto(f"~~ Descargando: {proyecto}", color="green") )
             os.system(f"git clone {GIT_USER}{proyecto} {PROJECTS_PATH}Estudios/{proyecto}")
         else:
