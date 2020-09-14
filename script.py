@@ -36,11 +36,12 @@ dependencias        = [
     "pyqt5-dev-tools", 
     "qttools5-dev-tools",
     "nodejs",
-    "snapd"
+    "snapd",
+    "wkhtmltopdf"
     ]
 
 dependencias_pip    = ["pdfkit","wkhtmltopdf"]
-dependencias_snap   = ["flutter","slack"]
+dependencias_snap   = ["flutter","slack","code"]
 folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
 proyectos_gitHUB    = [
     "SILISv4", 
@@ -103,10 +104,8 @@ def instalar_dependencias_pip(dependencia):
 
 def instalar_dependencia_snap(nombre_dependencia_snap):
     print( pintar_texto(f"....:::: Instalando Dependencia Snap: { colored(nombre_dependencia_snap, 'yellow')}", 'green') )
-    if nombre_dependencia_snap == "flutter":
-        os.system(f"sudo snap install {nombre_dependencia_snap} --classic")
-    else:
-        os.system(f"sudo snap install {nombre_dependencia_snap}")
+    os.system(f"sudo snap install {nombre_dependencia_snap} --classic")
+   
 
 def actualizar_sistema():
     for comando in comandos_primarios:
