@@ -121,7 +121,7 @@ export PATH="$HOME:/home/{NAME_USER}/custom_path:$PATH"
 #decoracion
 neofetch
     """
-    with open("~/.bashrc", "a") as file:
+    with open("home/{NAME_USER}/.bashrc", "a") as file:
         file.write(texto)
     print( pintar_texto("||>>> Aplicando cambios...", color="yellow") )
     os.system("source ~/.bashrc")
@@ -155,15 +155,15 @@ done
         os.system("touch ~/custom_path/actualizar ~/custom_path/instalar ~/custom_path/betty")
 
         print( pintar_texto("Creando archivo: Actualizar", color="green") )
-        with open("~/custom_path/actualizar", "w") as actualizar:
+        with open("home/{NAME_USER}/custom_path/actualizar", "w") as actualizar:
             actualizar.write("sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y")
         
         print( pintar_texto("Creando archivo: Instalar", color="green") )
-        with open("~/custom_path/instalar", "w") as instalar:
+        with open("home/{NAME_USER}/custom_path/instalar", "w") as instalar:
             actualizar.write("sudo apt install $1 -y")
         
         print( pintar_texto("Creando archivo: Betty", color="green") )
-        with open("~/custom_path/betty", "w") as betty:
+        with open("home/{NAME_USER}/custom_path/betty", "w") as betty:
             betty.write(code_betty)
     else:
         print( pintar_texto("No existe la carpeta custom_path, fallo creacion de archivos", color="red") )
@@ -194,11 +194,11 @@ def main():
 
     print( pintar_texto("..::..//~~ Exportando custom_path al PATH del sistema ~~//..::..", color="yellow") )
     exportar_path()
-    print( pintar_texto("..::..//~~ custom_path añadido al sistema sistema correctamente ~~//..::..", color="lime") )
+    print( pintar_texto("..::..//~~ custom_path añadido al sistema sistema correctamente ~~//..::..", color="pink") )
 
     print( pintar_texto("..::..//~~ Creando archivos dentro del custom_path ~~//..::..", color="yellow") )
     crear_archivos()
-    print( pintar_texto("..::..//~~ Archivos creados correctamente ~~//..::..", color="lime") )
+    print( pintar_texto("..::..//~~ Archivos creados correctamente ~~//..::..", color="pink") )
 
 
     #fin del codigo
