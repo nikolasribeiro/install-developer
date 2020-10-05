@@ -194,11 +194,11 @@ def main():
 
     print( pintar_texto("..::..//~~ Exportando custom_path al PATH del sistema ~~//..::..", color="yellow") )
     exportar_path()
-    print( pintar_texto("..::..//~~ custom_path añadido al sistema sistema correctamente ~~//..::..", color="pink") )
+    print( pintar_texto("..::..//~~ custom_path añadido al sistema sistema correctamente ~~//..::..", color="green") )
 
     print( pintar_texto("..::..//~~ Creando archivos dentro del custom_path ~~//..::..", color="yellow") )
     crear_archivos()
-    print( pintar_texto("..::..//~~ Archivos creados correctamente ~~//..::..", color="pink") )
+    print( pintar_texto("..::..//~~ Archivos creados correctamente ~~//..::..", color="green") )
 
 
     #fin del codigo
