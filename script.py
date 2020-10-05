@@ -123,6 +123,7 @@ neofetch
     """
     with open(f"/home/{NAME_USER}/.bashrc", "a") as file:
         file.write(texto)
+        
     print( pintar_texto("||>>> Aplicando cambios...", color="yellow") )
     os.system(f"source /home/{NAME_USER}/.bashrc")
 
@@ -158,14 +159,16 @@ done
         print( pintar_texto("Creando archivo: Actualizar", color="green") )
         with open(f"/home/{NAME_USER}/custom_path/actualizar", "w") as actualizar:
             actualizar.write("sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y")
+            actualizar.close()
         
         print( pintar_texto("Creando archivo: Instalar", color="green") )
         with open(f"/home/{NAME_USER}/custom_path/instalar", "w") as instalar:
-            actualizar.write("sudo apt install $1 -y")
+            instalar.write("sudo apt install $1 -y")
         
         print( pintar_texto("Creando archivo: Betty", color="green") )
         with open(f"/home/{NAME_USER}/custom_path/betty", "w") as betty:
             betty.write(code_betty)
+
     else:
         print( pintar_texto("No existe la carpeta custom_path, fallo creacion de archivos", color="red") )
 
