@@ -105,13 +105,69 @@ def instalar_dependencias_pip(dependencia):
 def instalar_dependencia_snap(nombre_dependencia_snap):
     print( pintar_texto(f"....:::: Instalando Dependencia Snap: { colored(nombre_dependencia_snap, 'yellow')}", 'green') )
     os.system(f"sudo snap install {nombre_dependencia_snap} --classic")
-   
 
 def actualizar_sistema():
     for comando in comandos_primarios:
         os.system(f"sudo apt {comando} -y")
     print( pintar_texto(f"....:::: Removiendo dependencias obsoletas...", "green") )
     os.system("sudo apt autoremove -y")
+
+def exportar_path():
+    print( pintar_texto("||>>> Abriendo el archivo bashrc...", color="yellow") )
+    texto = f""" 
+#Export custom_path to path
+export PATH="$HOME:/home/{NAME_USER}/custom_path:$PATH"
+
+#decoracion
+neofetch
+    """
+    with open("~/.bashrc", "a") as file:
+        file.write(texto)
+    print( pintar_texto("||>>> Aplicando cambios...", color="yellow") )
+    os.system("source ~/.bashrc")
+
+def crear_archivos():
+    code_betty = """ 
+#!/bin/bash
+# Simply a wrapper script to keep you from having to use betty-style
+# and betty-doc separately on every item.
+# Originally by Tim Britton (@wintermanc3r), multiargument added by
+# Larry Madeo (@hillmonkey)
+
+BIN_PATH="/usr/local/bin"
+BETTY_STYLE="betty-style"
+BETTY_DOC="betty-doc"
+
+if [ "$#" = "0" ]; then
+    echo "No arguments passed."
+    exit 1
+fi
+
+for argument in "$@" ; do
+    echo -e "\n========== $argument =========="
+    ${BIN_PATH}/${BETTY_STYLE} "$argument"
+    ${BIN_PATH}/${BETTY_DOC} "$argument"
+done
+    
+"""
+
+    if os.path.exists(f"/home/{NAME_USER}/custom_path"):
+        os.system("touch ~/custom_path/actualizar ~/custom_path/instalar ~/custom_path/betty")
+
+        print( pintar_texto("Creando archivo: Actualizar", color="green") )
+        with open("~/custom_path/actualizar", "w") as actualizar:
+            actualizar.write("sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y")
+        
+        print( pintar_texto("Creando archivo: Instalar", color="green") )
+        with open("~/custom_path/instalar", "w") as instalar:
+            actualizar.write("sudo apt install $1 -y")
+        
+        print( pintar_texto("Creando archivo: Betty", color="green") )
+        with open("~/custom_path/betty", "w") as betty:
+            betty.write(code_betty)
+    else:
+        print( pintar_texto("No existe la carpeta custom_path, fallo creacion de archivos", color="red") )
+
 
 def main():
     print( pintar_texto("....:::: Actualizando el sistema ::::....", 'yellow') )
@@ -135,15 +191,24 @@ def main():
     for proyecto in proyectos_gitHUB:
         importar_proyectos(proyecto)
 
-    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )
-    
+
+    print( pintar_texto("..::..//~~ Exportando custom_path al PATH del sistema ~~//..::..", color="yellow") )
+    exportar_path()
+    print( pintar_texto("..::..//~~ custom_path añadido al sistema sistema correctamente ~~//..::..", color="lime") )
+
+    print( pintar_texto("..::..//~~ Creando archivos dentro del custom_path ~~//..::..", color="yellow") )
+    crear_archivos()
+    print( pintar_texto("..::..//~~ Archivos creados correctamente ~~//..::..", color="lime") )
+
+
+    #fin del codigo
+    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )    
     print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )    
-
-
 
 
 if __name__ == "__main__":
     main()
+
     
     
 
