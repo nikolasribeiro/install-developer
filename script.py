@@ -124,7 +124,7 @@ neofetch
     with open(f"/home/{NAME_USER}/.bashrc", "a") as file:
         file.write(texto)
     print( pintar_texto("||>>> Aplicando cambios...", color="yellow") )
-    os.system("source ~/.bashrc")
+    os.system(f"source /home/{NAME_USER}/.bashrc")
 
 def crear_archivos():
     code_betty = """ 
@@ -153,6 +153,7 @@ done
 
     if os.path.exists(f"/home/{NAME_USER}/custom_path"):
         os.system("touch ~/custom_path/actualizar ~/custom_path/instalar ~/custom_path/betty")
+        time.sleep(2)
 
         print( pintar_texto("Creando archivo: Actualizar", color="green") )
         with open(f"/home/{NAME_USER}/custom_path/actualizar", "w") as actualizar:
