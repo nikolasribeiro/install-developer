@@ -196,7 +196,7 @@ syntax enable
 colorscheme dracula
 """
     os.system("touch ~/.vimrc")
-    with open(f"/home/{NAME_USER}/.vimrc") as vimrc:
+    with open(f"/home/{NAME_USER}/.vimrc", "w") as vimrc:
         vimrc.write(contenido_vimrc)
     
 
