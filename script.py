@@ -156,16 +156,16 @@ done
         os.system("touch ~/custom_path/actualizar ~/custom_path/instalar ~/custom_path/betty")
         time.sleep(2)
 
-        print( pintar_texto("Creando archivo: Actualizar", color="green") )
+        print( pintar_texto(f"Creando archivo: { colored("Actualizar", 'yellow') }", color="green") )
         with open(f"/home/{NAME_USER}/custom_path/actualizar", "w") as actualizar:
             actualizar.write("sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y")
             actualizar.close()
         
-        print( pintar_texto("Creando archivo: Instalar", color="green") )
+        print( pintar_texto(f"Creando archivo: { colored("Instalar", 'yellow') }", color="green") )
         with open(f"/home/{NAME_USER}/custom_path/instalar", "w") as instalar:
             instalar.write("sudo apt install $1 -y")
         
-        print( pintar_texto("Creando archivo: Betty", color="green") )
+        print( pintar_texto(f"Creando archivo: { colored("Betty", 'yellow') }", color="green") )
         with open(f"/home/{NAME_USER}/custom_path/betty", "w") as betty:
             betty.write(code_betty)
 
@@ -196,9 +196,9 @@ def main():
         importar_proyectos(proyecto)
 
 
-    print( pintar_texto("..::..//~~ Exportando custom_path al PATH del sistema ~~//..::..", color="yellow") )
+    print( pintar_texto(f"..::..//~~ Exportando {colored("custom_path", 'yellow')} al PATH del sistema ~~//..::..", color="yellow") )
     exportar_path()
-    print( pintar_texto("..::..//~~ custom_path añadido al sistema sistema correctamente ~~//..::..", color="green") )
+    print( pintar_texto(f"..::..//~~ {colored("custom_path", 'yellow')} añadido al sistema sistema correctamente ~~//..::..", color="green") )
 
     print( pintar_texto("..::..//~~ Creando archivos dentro del custom_path ~~//..::..", color="yellow") )
     crear_archivos()
@@ -206,8 +206,10 @@ def main():
 
 
     #fin del codigo
-    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )    
-    print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )    
+    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )
+    print(pintar_texto("Aplicando source al bashrc...", color="white"))
+    os.system("source ~/.bashrc")
+    print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )
 
 
 if __name__ == "__main__":
