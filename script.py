@@ -52,7 +52,8 @@ proyectos_gitHUB    = [
     "inmobiliaria",
     "covid-tracker",
     "holbertonschool-zero_day",             #Estudio
-    "holberton-system_engineering-devops"   #Estudio
+    "holberton-system_engineering-devops",  #Estudio
+    "holbertonschool-low_level_programming" #Estudio
     ]
 
 proyectos_gitLAB    = ["Clicker"]
@@ -68,7 +69,7 @@ def importar_proyectos(proyecto):
     if os.path.exists(f"/home/{NAME_USER}/Documentos/Proyectos/{proyecto}") or os.path.exists(f"/home/{NAME_USER}/Documentos/Estudios/{proyecto}"):
         print( pintar_texto(f"~~ El Proyecto {proyecto} ya existe.", color="red") )
     else:
-        if proyecto in ["curso_web", "curso_flutter", "holbertonschool-zero_day", "holberton-system_engineering-devops"]:
+        if proyecto in ["curso_web", "curso_flutter", "holbertonschool-zero_day", "holberton-system_engineering-devops", "holbertonschool-low_level_programming"]:
             print( pintar_texto(f"~~ Descargando: {proyecto}", color="green") )
             os.system(f"git clone {GIT_USER}{proyecto} {PROJECTS_PATH}Estudios/{proyecto}")
         else:
