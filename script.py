@@ -123,9 +123,7 @@ neofetch
     """
     with open(f"/home/{NAME_USER}/.bashrc", "a") as file:
         file.write(texto)
-        
-    print( pintar_texto("||>>> Aplicando cambios...", color="yellow") )
-    os.system(f"source /home/{NAME_USER}/.bashrc")
+
 
 def crear_archivos():
     code_betty = """ 
@@ -206,10 +204,9 @@ def main():
 
 
     #fin del codigo
-    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )
-    print(pintar_texto("Aplicando source al bashrc...", color="white"))
-    os.system("source ~/.bashrc")
+    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )  
     print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )
+    print( pintar_texto("Para aplicar todos los cambios del bashrc, ejecute: source ~/.bashrc", color="white") )
 
 
 if __name__ == "__main__":
