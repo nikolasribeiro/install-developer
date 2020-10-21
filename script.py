@@ -170,6 +170,17 @@ done
     else:
         print( pintar_texto("No existe la carpeta custom_path, fallo creacion de archivos", color="red") )
 
+    #Permisos de ejecucion a actualizar
+    print(pintar_texto(f"Añadiendo permisos de ejecucion a: { colored('Actualizar','yellow') }", color="green"))
+    os.system("chmod +x ~/custom_path/actualizar")
+
+    #Permisos de ejecucion a instalar
+    print(pintar_texto(f"Añadiendo permisos de ejecucion a: { colored('Instalar','yellow') }", color="green"))
+    os.system("chmod +x ~/custom_path/instalar")
+
+    #Permisos de ejecucion a betty
+    print(pintar_texto(f"Añadiendo permisos de ejecucion a: { colored('Betty','yellow') }", color="green"))
+    os.system("chmod +x ~/custom_path/betty")
 
 def main():
     print( pintar_texto("....:::: Actualizando el sistema ::::....", 'yellow') )
