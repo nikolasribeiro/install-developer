@@ -183,8 +183,7 @@ done
     os.system("chmod +x ~/custom_path/betty")
 
 def crear_vimrc():
-    contenido_vimrc = 
-"""
+    contenido_vimrc = """
 set tabstop=4 shiftwidth=4
 set autoindent
 set smartindent
