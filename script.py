@@ -196,9 +196,9 @@ def main():
         importar_proyectos(proyecto)
 
 
-    print( pintar_texto(f"..::..//~~ Exportando {colored("custom_path", 'yellow')} al PATH del sistema ~~//..::..", color="yellow") )
+    print( pintar_texto(f"..::..//~~ Exportando {colored('custom_path', 'yellow')} al PATH del sistema ~~//..::..", color="yellow") )
     exportar_path()
-    print( pintar_texto(f"..::..//~~ {colored("custom_path", 'yellow')} añadido al sistema sistema correctamente ~~//..::..", color="green") )
+    print( pintar_texto(f"..::..//~~ {colored('custom_path', 'yellow')} añadido al sistema sistema correctamente ~~//..::..", color="green") )
 
     print( pintar_texto("..::..//~~ Creando archivos dentro del custom_path ~~//..::..", color="yellow") )
     crear_archivos()
