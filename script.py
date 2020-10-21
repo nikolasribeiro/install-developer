@@ -156,16 +156,16 @@ done
         os.system("touch ~/custom_path/actualizar ~/custom_path/instalar ~/custom_path/betty")
         time.sleep(2)
 
-        print( pintar_texto(f"Creando archivo: { colored("Actualizar", 'yellow') }", color="green") )
+        print( pintar_texto(f"Creando archivo: { colored('Actualizar', 'yellow') }", color="green") )
         with open(f"/home/{NAME_USER}/custom_path/actualizar", "w") as actualizar:
             actualizar.write("sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y")
             actualizar.close()
         
-        print( pintar_texto(f"Creando archivo: { colored("Instalar", 'yellow') }", color="green") )
+        print( pintar_texto(f"Creando archivo: { colored('Instalar', 'yellow') }", color="green") )
         with open(f"/home/{NAME_USER}/custom_path/instalar", "w") as instalar:
             instalar.write("sudo apt install $1 -y")
         
-        print( pintar_texto(f"Creando archivo: { colored("Betty", 'yellow') }", color="green") )
+        print( pintar_texto(f"Creando archivo: { colored('Betty', 'yellow') }", color="green") )
         with open(f"/home/{NAME_USER}/custom_path/betty", "w") as betty:
             betty.write(code_betty)
 
