@@ -227,8 +227,8 @@ def main():
 
 
     #Creacion del vimrc
-
-
+    print(pintar_texto(f"Creando archivo {colored('vimrc', 'cyan')}"))
+    crear_vimrc()
 
     print( pintar_texto(f"..::..//~~ Exportando {colored('custom_path', 'yellow')} al PATH del sistema ~~//..::..", color="yellow") )
     exportar_path()
