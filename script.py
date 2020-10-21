@@ -196,12 +196,9 @@ syntax enable
 colorscheme dracula
 """
     os.system("touch ~/.vimrc")
-    if (os.path.exists(f"home/{NAME_USER}/.vimrc")):
-        with open(f"/home/{NAME_USER}/.vimrc") as vimrc:
-            vimrc.write(contenido_vimrc)
-    else:
-        print("Error: Archivo .vimrc no existe, abortando sesion")
-
+    with open(f"/home/{NAME_USER}/.vimrc") as vimrc:
+        vimrc.write(contenido_vimrc)
+    
 
 def main():
     print( pintar_texto("....:::: Actualizando el sistema ::::....", 'yellow') )
