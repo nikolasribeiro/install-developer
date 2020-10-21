@@ -182,6 +182,28 @@ done
     print(pintar_texto(f"Añadiendo permisos de ejecucion a: { colored('Betty','yellow') }", color="green"))
     os.system("chmod +x ~/custom_path/betty")
 
+def crear_vimrc():
+    contenido_vimrc = 
+"""
+set tabstop=4 shiftwidth=4
+set autoindent
+set smartindent
+set cindent
+set number
+set relativenumber
+
+packadd! dracula
+syntax enable
+colorscheme dracula
+"""
+    os.system("touch ~/.vimrc")
+    if (os.path.exists(f"home/{NAME_USER}/.vimrc")):
+        with open(f"/home/{NAME_USER}/.vimrc") as vimrc:
+            vimrc.write(contenido_vimrc)
+    else:
+        print("Error: Archivo .vimrc no existe, abortando sesion")
+
+
 def main():
     print( pintar_texto("....:::: Actualizando el sistema ::::....", 'yellow') )
     actualizar_sistema()
@@ -203,6 +225,10 @@ def main():
     
     for proyecto in proyectos_gitHUB:
         importar_proyectos(proyecto)
+
+
+    #Creacion del vimrc
+
 
 
     print( pintar_texto(f"..::..//~~ Exportando {colored('custom_path', 'yellow')} al PATH del sistema ~~//..::..", color="yellow") )
