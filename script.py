@@ -192,9 +192,8 @@ set cindent
 set number
 set relativenumber
 
-packadd! dracula
+
 syntax enable
-colorscheme dracula
 """
     os.system("touch ~/.vimrc")
     with open(f"/home/{NAME_USER}/.vimrc", "w") as vimrc:
