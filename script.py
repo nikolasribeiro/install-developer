@@ -41,7 +41,7 @@ dependencias        = [
     ]
 
 dependencias_pip    = ["pdfkit","wkhtmltopdf"]
-dependencias_snap   = ["flutter","slack","code"]
+dependencias_snap   = ["flutter","slack","code","android-studio","google-cloud-sdk"]
 folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
 proyectos_gitHUB    = [
     "SILISv4", 
