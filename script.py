@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ 
 Script que instala todo el entorno de desarrollo que utilizo cuando migro de
 distribucion linux.
@@ -41,7 +42,7 @@ dependencias        = [
     ]
 
 dependencias_pip    = ["pdfkit","wkhtmltopdf"]
-dependencias_snap   = ["flutter","slack","code","android-studio","google-cloud-sdk"]
+dependencias_snap   = ["flutter","slack","code","google-cloud-sdk"]
 folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
 proyectos_gitHUB    = [
     "SILISv4", 
@@ -53,7 +54,8 @@ proyectos_gitHUB    = [
     "covid-tracker",
     "holbertonschool-zero_day",             #Estudio
     "holberton-system_engineering-devops",  #Estudio
-    "holbertonschool-low_level_programming" #Estudio
+    "holbertonschool-low_level_programming",#Estudio
+    "holbertonscript"
     ]
 
 proyectos_gitLAB    = ["Clicker"]
