@@ -37,6 +37,7 @@ dependencias        = [
     "pyqt5-dev-tools", 
     "qttools5-dev-tools",
     "nodejs",
+    "npm",
     "snapd",
     "wkhtmltopdf"
     ]
