@@ -201,9 +201,19 @@ syntax enable
     os.system("touch ~/.vimrc")
     with open(f"/home/{NAME_USER}/.vimrc", "w") as vimrc:
         vimrc.write(contenido_vimrc)
-    
+
+
+def install_betty_on_system():
+    print(pintar_texto("Instalando betty en el sistema", color="yellow"))
+    os.system("git clone https://github.com/holbertonschool/Betty.git")
+    os.system("cd Betty")
+    os.system("sudo ./Betty/install.sh")
+    os.system("rm -rf Betty")
+    print(pintar_texto("Betty instalado correctamente", color="yellow"))
+
 
 def main():
+
     print( pintar_texto("....:::: Actualizando el sistema ::::....", 'yellow') )
     actualizar_sistema()
     print( pintar_texto("....:::: Sistema Actualizado ::::....", 'yellow') )
@@ -230,6 +240,9 @@ def main():
     print(pintar_texto(f"Creando archivo {colored('vimrc', 'cyan')}"))
     crear_vimrc()
 
+    #Instalando Betty en el sistema
+    install_betty_on_system()
+
     print( pintar_texto(f"..::..//~~ Exportando {colored('custom_path', 'yellow')} al PATH del sistema ~~//..::..", color="yellow") )
     exportar_path()
     print( pintar_texto(f"..::..//~~ {colored('custom_path', 'yellow')} añadido al sistema sistema correctamente ~~//..::..", color="green") )
@@ -244,6 +257,7 @@ def main():
     print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )
     print( pintar_texto("Para aplicar todos los cambios del bashrc, ejecute: source ~/.bashrc", color="white") )
 
+    
 
 if __name__ == "__main__":
     main()
