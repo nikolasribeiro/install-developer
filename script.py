@@ -18,17 +18,12 @@ except:
     print("---=== TERMCOLOR INSTALADO ===---")
     os.system("python3 script.py")
 
-
-#os.popen(comando linux).read(), ejecuta un comando en terminal y almacena
-#el resultado en una variable
-
 comandos_primarios  = ["update","upgrade","dist-upgrade"]
 dependencias        = [
     "virtualenv",
     "neofetch",
     "cmatrix",
     "vim",
-    "emacs",
     "htop",
     "openssh-server",
     "openssh-client",
@@ -39,8 +34,8 @@ dependencias        = [
     "nodejs",
     "npm",
     "snapd",
-    "wkhtmltopdf"
-    ]
+    "wkhtmltopdf",
+]
 
 dependencias_pip    = ["pdfkit","wkhtmltopdf"]
 dependencias_snap   = ["flutter","slack","code","google-cloud-sdk"]
@@ -48,21 +43,24 @@ folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
 proyectos_gitHUB    = [
     "SILISv4", 
     "creacion",
-    "curso_web",                            #Estudio 
-    "curso_flutter",                        #Estudio
+    "curso_web",                                #Estudio 
+    "curso_flutter",                            #Estudio
     "porfolio", 
-    "inmobiliaria",
-    "covid-tracker",
-    "holbertonschool-zero_day",             #Estudio
-    "holberton-system_engineering-devops",  #Estudio
-    "holbertonschool-low_level_programming",#Estudio
-    "holbertonscript"
+    "covid-tracker",    
+    "holbertonschool-zero_day",                 #Estudio
+    "holberton-system_engineering-devops",      #Estudio
+    "holbertonschool-low_level_programming",    #Estudio
+    "holbertonschool-high_level_programming",   #Estudio
+    "holbertonscript",
+    "libro",
+    "silisweb"
     ]
 
 proyectos_gitLAB    = ["Clicker"]
 NAME_USER           = getpass.getuser()
 PROJECTS_PATH       = f"/home/{NAME_USER}/Documentos/"
 GIT_USER            = "https://github.com/nikolasribeiro/"
+
 
 def pintar_texto(texto, color="white"):
     return colored(texto, color)
@@ -72,7 +70,14 @@ def importar_proyectos(proyecto):
     if os.path.exists(f"/home/{NAME_USER}/Documentos/Proyectos/{proyecto}") or os.path.exists(f"/home/{NAME_USER}/Documentos/Estudios/{proyecto}"):
         print( pintar_texto(f"~~ El Proyecto {proyecto} ya existe.", color="red") )
     else:
-        if proyecto in ["curso_web", "curso_flutter", "holbertonschool-zero_day", "holberton-system_engineering-devops", "holbertonschool-low_level_programming"]:
+        if proyecto in [
+            "curso_web", 
+            "curso_flutter", 
+            "holbertonschool-zero_day", 
+            "holberton-system_engineering-devops", 
+            "holbertonschool-low_level_programming",
+            "holbertonschool-high_level_programming"
+        ]:
             print( pintar_texto(f"~~ Descargando: {proyecto}", color="green") )
             os.system(f"git clone {GIT_USER}{proyecto} {PROJECTS_PATH}Estudios/{proyecto}")
         else:
@@ -205,10 +210,8 @@ syntax enable
 
 def install_betty_on_system():
     print(pintar_texto("Instalando betty en el sistema", color="yellow"))
-    os.system("git clone https://github.com/holbertonschool/Betty.git")
-    os.system("cd Betty")
-    os.system("sudo ./Betty/install.sh")
-    os.system("rm -rf Betty")
+    os.system(f"git clone https://github.com/holbertonschool/Betty.git ~/Betty")
+    os.system("sudo ~/Betty/install.sh")
     print(pintar_texto("Betty instalado correctamente", color="yellow"))
 
 
@@ -218,7 +221,9 @@ def main():
     actualizar_sistema()
     print( pintar_texto("....:::: Sistema Actualizado ::::....", 'yellow') )
 
-    time.sleep(1)
+    print( pintar_texto("....:::: Activando el guardado global de credenciales GIT ::::....", 'green') )
+    os.system("git config --global credential.helper store")
+
     
     for carpeta in folders:
         crear_carpetas(carpeta)
@@ -234,7 +239,7 @@ def main():
     
     for proyecto in proyectos_gitHUB:
         importar_proyectos(proyecto)
-
+    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )
 
     #Creacion del vimrc
     print(pintar_texto(f"Creando archivo {colored('vimrc', 'cyan')}"))
@@ -253,14 +258,16 @@ def main():
 
 
     #fin del codigo
-    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )  
     print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )
     print( pintar_texto("Para aplicar todos los cambios del bashrc, ejecute: source ~/.bashrc", color="white") )
+    os.system("source ~/.bashrc")
 
-    
+def test():
+    install_betty_on_system()
 
 if __name__ == "__main__":
     main()
+    #test()
 
     
     
