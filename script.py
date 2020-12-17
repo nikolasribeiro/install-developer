@@ -53,7 +53,8 @@ proyectos_gitHUB    = [
     "holbertonschool-high_level_programming",   #Estudio
     "holbertonscript",
     "libro",
-    "silisweb"
+    "silisweb",
+    "backup-pc"
     ]
 
 proyectos_gitLAB    = ["Clicker"]
