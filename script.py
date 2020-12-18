@@ -224,6 +224,8 @@ def main():
 
     print( pintar_texto("....:::: Activando el guardado global de credenciales GIT ::::....", 'green') )
     os.system("git config --global credential.helper store")
+    os.system('git config --global user.email "nikolasribeiro2@outlook.com"')
+    os.system('git config --global user.name "Nicolas Ribeiro"')
 
     
     for carpeta in folders:
