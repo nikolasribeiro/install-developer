@@ -38,7 +38,7 @@ dependencias        = [
 ]
 
 dependencias_pip    = ["pdfkit","wkhtmltopdf"]
-dependencias_snap   = ["flutter","slack","code","google-cloud-sdk"]
+dependencias_snap   = ["flutter","slack","code","google-cloud-sdk", "heroku"]
 folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
 proyectos_gitHUB    = [
     "SILISv4", 
@@ -55,7 +55,7 @@ proyectos_gitHUB    = [
     "libro",
     "silisweb",
     "backup-pc"
-    ]
+]
 
 proyectos_gitLAB    = ["Clicker"]
 NAME_USER           = getpass.getuser()
