@@ -264,6 +264,9 @@ def main():
     print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )
     print( pintar_texto("Para aplicar todos los cambios del bashrc, ejecute: source ~/.bashrc", color="white") )
     os.system("source ~/.bashrc")
+    time.sleep(10)
+    sys.exit()
+    
 
 def test():
     install_betty_on_system()
