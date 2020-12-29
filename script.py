@@ -59,7 +59,7 @@ proyectos_gitHUB    = [
 
 proyectos_gitLAB    = ["Clicker"]
 NAME_USER           = getpass.getuser()
-PROJECTS_PATH       = f"/home/{NAME_USER}/Documentos/"
+PROJECTS_PATH       = "/home/{}/Documentos/".format(NAME_USER)
 GIT_USER            = "https://github.com/nikolasribeiro/"
 
 
@@ -68,8 +68,8 @@ def pintar_texto(texto, color="white"):
 
 def importar_proyectos(proyecto):
 
-    if os.path.exists(f"/home/{NAME_USER}/Documentos/Proyectos/{proyecto}") or os.path.exists(f"/home/{NAME_USER}/Documentos/Estudios/{proyecto}"):
-        print( pintar_texto(f"~~ El Proyecto {proyecto} ya existe.", color="red") )
+    if os.path.exists("/home/{}/Documentos/Proyectos/{}".format(NAME_USER, proyecto)) or os.path.exists("/home/{}/Documentos/Estudios/{}".format(NAME_USER, proyecto)):
+        print( pintar_texto("~~ El Proyecto {} ya existe.".format(proyecto), color="red") )
     else:
         if proyecto in [
             "curso_web", 
@@ -79,59 +79,60 @@ def importar_proyectos(proyecto):
             "holbertonschool-low_level_programming",
             "holbertonschool-high_level_programming"
         ]:
-            print( pintar_texto(f"~~ Descargando: {proyecto}", color="green") )
-            os.system(f"git clone {GIT_USER}{proyecto} {PROJECTS_PATH}Estudios/{proyecto}")
+            print( pintar_texto("~~ Descargando: {}".format(proyecto), color="green") )
+            os.system("git clone {}{} {}Estudios/{}".format(GIT_USER, proyecto, PROJECTS_PATH, proyecto))
         else:
-            print( pintar_texto(f"~~ Descargando: {proyecto}", color="green") )
-            os.system(f"git clone {GIT_USER}{proyecto} {PROJECTS_PATH}Proyectos/{proyecto}")
+            print( pintar_texto("~~ Descargando: {}".format(proyecto), color="green") )
+            os.system("git clone {}{} {}Proyectos/{}".format(GIT_USER, proyecto, PROJECTS_PATH, proyecto))
 
 def crear_carpetas(nombre):
     
     if nombre == "custom_path":
-        if os.path.exists(f"/home/{NAME_USER}/custom_path"):
-            print( pintar_texto(f"La carpeta {nombre} ya existe...", "red") )
+        if os.path.exists("/home/{}/custom_path".format(NAME_USER)):
+            print( pintar_texto("La carpeta {} ya existe...".format(nombre), "red") )
         else:
-            print( pintar_texto(f"Creando carpeta: {nombre}", 'green') )
-            os.system(f"mkdir {nombre}")
-            os.system(f"cp -r {nombre}  /home/{NAME_USER}" )
-            os.system(f"rmdir {nombre}")
+            print( pintar_texto("Creando carpeta: {}".format(nombre), 'green') )
+            os.system("mkdir {}".format(nombre))
+            os.system("cp -r {}  /home/{}".format(nombre, NAME_USER) )
+            os.system("rmdir {}".format(nombre))
     else:
         if os.path.exists(PROJECTS_PATH + nombre):
-            print( pintar_texto(f"La carpeta {nombre} ya existe...", "red") )
+            print( pintar_texto("La carpeta {} ya existe...".format(nombre), "red") )
         else:
-            print( pintar_texto(f"Creando carpeta: {nombre}", 'green') )
-            os.system(f"mkdir {nombre}")
-            os.system(f"cp -r {nombre} {PROJECTS_PATH}" )
-            os.system(f"rmdir {nombre}")
+            print( pintar_texto("Creando carpeta: {}".format(nombre), 'green') )
+            os.system("mkdir {}".format(nombre))
+            os.system("cp -r {} {}".format(nombre, PROJECTS_PATH) )
+            os.system("rmdir {}".format(nombre))
 
 def instalar_dependencia(nombre_dependencia):
     print( pintar_texto(f"....:::: Instalando Dependencia: { colored(nombre_dependencia, 'yellow') }", 'green') )
-    os.system(f"sudo apt install {nombre_dependencia} -y")
+    os.system("sudo apt install {} -y".format(nombre_dependencia))
 
 def instalar_dependencias_pip(dependencia):
-    print( pintar_texto(f"....:::: Instalando Dependencia PIP: { colored(dependencia, 'yellow') }", 'green') )
-    os.system(f"pip3 install {dependencia}")
+    print( pintar_texto("....:::: Instalando Dependencia PIP: {}".format( colored(dependencia, 'yellow') ), 'green') )
+    os.system("pip3 install {}".format(dependencia))
 
 def instalar_dependencia_snap(nombre_dependencia_snap):
-    print( pintar_texto(f"....:::: Instalando Dependencia Snap: { colored(nombre_dependencia_snap, 'yellow')}", 'green') )
-    os.system(f"sudo snap install {nombre_dependencia_snap} --classic")
+    print( pintar_texto("....:::: Instalando Dependencia Snap: {}".format( colored(nombre_dependencia_snap, 'yellow') ), 'green') )
+    os.system("sudo snap install {} --classic".format(nombre_dependencia_snap))
 
 def actualizar_sistema():
     for comando in comandos_primarios:
-        os.system(f"sudo apt {comando} -y")
-    print( pintar_texto(f"....:::: Removiendo dependencias obsoletas...", "green") )
+        os.system("sudo apt {} -y".format(comando))
+    print( pintar_texto("....:::: Removiendo dependencias obsoletas...", "green") )
     os.system("sudo apt autoremove -y")
 
 def exportar_path():
     print( pintar_texto("||>>> Abriendo el archivo bashrc...", color="yellow") )
-    texto = f""" 
+    texto = """ 
 #Export custom_path to path
-export PATH="$HOME:/home/{NAME_USER}/custom_path:$PATH"
+export PATH="$HOME:/home/{}/custom_path:$PATH"
 
 #decoracion
 neofetch
-    """
-    with open(f"/home/{NAME_USER}/.bashrc", "a") as file:
+    """.format(NAME_USER)
+
+    with open("/home/{}/.bashrc".format(NAME_USER), "a") as file:
         file.write(texto)
 
 
@@ -160,36 +161,36 @@ done
     
 """
 
-    if os.path.exists(f"/home/{NAME_USER}/custom_path"):
+    if os.path.exists("/home/{}/custom_path".format(NAME_USER)):
         os.system("touch ~/custom_path/actualizar ~/custom_path/instalar ~/custom_path/betty")
         time.sleep(2)
 
-        print( pintar_texto(f"Creando archivo: { colored('Actualizar', 'yellow') }", color="green") )
-        with open(f"/home/{NAME_USER}/custom_path/actualizar", "w") as actualizar:
+        print( pintar_texto("Creando archivo: {}".format( colored('Actualizar', 'yellow') ), color="green") )
+        with open("/home/{}/custom_path/actualizar".format(NAME_USER), "w") as actualizar:
             actualizar.write("sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y")
             actualizar.close()
         
-        print( pintar_texto(f"Creando archivo: { colored('Instalar', 'yellow') }", color="green") )
-        with open(f"/home/{NAME_USER}/custom_path/instalar", "w") as instalar:
+        print( pintar_texto("Creando archivo: {}".format( colored('Instalar', 'yellow') ), color="green") )
+        with open("/home/{}/custom_path/instalar".format(NAME_USER), "w") as instalar:
             instalar.write("sudo apt install $1 -y")
         
-        print( pintar_texto(f"Creando archivo: { colored('Betty', 'yellow') }", color="green") )
-        with open(f"/home/{NAME_USER}/custom_path/betty", "w") as betty:
+        print( pintar_texto("Creando archivo: {}".format( colored('Betty', 'yellow') ), color="green") )
+        with open("/home/{}/custom_path/betty".format(NAME_USER), "w") as betty:
             betty.write(code_betty)
 
     else:
         print( pintar_texto("No existe la carpeta custom_path, fallo creacion de archivos", color="red") )
 
     #Permisos de ejecucion a actualizar
-    print(pintar_texto(f"Añadiendo permisos de ejecucion a: { colored('Actualizar','yellow') }", color="green"))
+    print(pintar_texto("Añadiendo permisos de ejecucion a: {}".format( colored('Actualizar','yellow') ), color="green"))
     os.system("chmod +x ~/custom_path/actualizar")
 
     #Permisos de ejecucion a instalar
-    print(pintar_texto(f"Añadiendo permisos de ejecucion a: { colored('Instalar','yellow') }", color="green"))
+    print(pintar_texto("Añadiendo permisos de ejecucion a: {}".format( colored('Instalar','yellow') ), color="green"))
     os.system("chmod +x ~/custom_path/instalar")
 
     #Permisos de ejecucion a betty
-    print(pintar_texto(f"Añadiendo permisos de ejecucion a: { colored('Betty','yellow') }", color="green"))
+    print(pintar_texto("Añadiendo permisos de ejecucion a: {}".format( colored('Betty','yellow') ), color="green"))
     os.system("chmod +x ~/custom_path/betty")
 
 def crear_vimrc():
@@ -205,13 +206,13 @@ set relativenumber
 syntax enable
 """
     os.system("touch ~/.vimrc")
-    with open(f"/home/{NAME_USER}/.vimrc", "w") as vimrc:
+    with open("/home/{NAME_USER}/.vimrc".format(NAME_USER), "w") as vimrc:
         vimrc.write(contenido_vimrc)
 
 
 def install_betty_on_system():
     print(pintar_texto("Instalando betty en el sistema", color="yellow"))
-    os.system(f"git clone https://github.com/holbertonschool/Betty.git ~/Betty")
+    os.system("git clone https://github.com/holbertonschool/Betty.git ~/Betty")
     os.system("sudo ~/Betty/install.sh")
     print(pintar_texto("Betty instalado correctamente", color="yellow"))
 
@@ -242,18 +243,18 @@ def main():
     
     for proyecto in proyectos_gitHUB:
         importar_proyectos(proyecto)
-    print( pintar_texto(f"~~ Descarga de Repositorios Finalizada ~~", color="green") )
+    print( pintar_texto("~~ Descarga de Repositorios Finalizada ~~", color="green") )
 
     #Creacion del vimrc
-    print(pintar_texto(f"Creando archivo {colored('vimrc', 'cyan')}"))
+    print(pintar_texto("Creando archivo {}".format( colored('vimrc', 'cyan') )))
     crear_vimrc()
 
     #Instalando Betty en el sistema
     install_betty_on_system()
 
-    print( pintar_texto(f"..::..//~~ Exportando {colored('custom_path', 'yellow')} al PATH del sistema ~~//..::..", color="yellow") )
+    print( pintar_texto("..::..//~~ Exportando {} al PATH del sistema ~~//..::..".format( colored('custom_path', 'yellow') ), color="yellow") )
     exportar_path()
-    print( pintar_texto(f"..::..//~~ {colored('custom_path', 'yellow')} añadido al sistema sistema correctamente ~~//..::..", color="green") )
+    print( pintar_texto("..::..//~~ {} añadido al sistema sistema correctamente ~~//..::..".format( colored('custom_path', 'yellow') ), color="green") )
 
     print( pintar_texto("..::..//~~ Creando archivos dentro del custom_path ~~//..::..", color="yellow") )
     crear_archivos()
