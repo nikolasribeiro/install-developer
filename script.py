@@ -50,7 +50,7 @@ proyectos_gitHUB    = [
     "holbertonschool-zero_day",                 #Estudio
     "holberton-system_engineering-devops",      #Estudio
     "holbertonschool-low_level_programming",    #Estudio
-    "holbertonschool-high_level_programming",   #Estudio
+    "holbertonschool-higher_level_programming",   #Estudio
     "holbertonscript",
     "libro",
     "silisweb",
@@ -213,7 +213,7 @@ syntax enable
 def install_betty_on_system():
     print(pintar_texto("Instalando betty en el sistema", color="yellow"))
     os.system("git clone https://github.com/holbertonschool/Betty.git ~/Betty")
-    os.system("sudo ~/Betty/install.sh")
+    os.system("sudo /home/{}/Betty/install.sh")
     print(pintar_texto("Betty instalado correctamente", color="yellow"))
 
 
