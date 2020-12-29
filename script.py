@@ -105,7 +105,7 @@ def crear_carpetas(nombre):
             os.system("rmdir {}".format(nombre))
 
 def instalar_dependencia(nombre_dependencia):
-    print( pintar_texto(f"....:::: Instalando Dependencia: { colored(nombre_dependencia, 'yellow') }", 'green') )
+    print( pintar_texto("....:::: Instalando Dependencia: {}".format( colored(nombre_dependencia, 'yellow') ), 'green') )
     os.system("sudo apt install {} -y".format(nombre_dependencia))
 
 def instalar_dependencias_pip(dependencia):
