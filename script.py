@@ -16,7 +16,7 @@ except:
     os.system("sudo apt install python3-pip -y")
     os.system("pip3 install termcolor")
     print("---=== TERMCOLOR INSTALADO ===---")
-    os.system("python3 script.py")
+    
 
 comandos_primarios  = ["update","upgrade","dist-upgrade"]
 dependencias        = [
@@ -206,7 +206,7 @@ set relativenumber
 syntax enable
 """
     os.system("touch ~/.vimrc")
-    with open("/home/{NAME_USER}/.vimrc".format(NAME_USER), "w") as vimrc:
+    with open("/home/{}/.vimrc".format(NAME_USER), "w") as vimrc:
         vimrc.write(contenido_vimrc)
 
 
