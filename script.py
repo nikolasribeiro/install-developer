@@ -213,7 +213,7 @@ syntax enable
 def install_betty_on_system():
     print(pintar_texto("Instalando betty en el sistema", color="yellow"))
     os.system("git clone https://github.com/holbertonschool/Betty.git ~/Betty")
-    os.system("sudo /home/{}/Betty/install.sh")
+    os.system("sudo /home/{}/Betty/install.sh".format(NAME_USER))
     print(pintar_texto("Betty instalado correctamente", color="yellow"))
 
 
