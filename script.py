@@ -10,16 +10,21 @@ import time
 import getpass
 
 try:
-    from termcolor import colored, cprint
+    from termcolor import colored
+    from simple_term_menu import TerminalMenu
 except:
-    print("...::: No se encontro la dependencia TERMCOLOR, el programa procedera a instalarlo a continuacion :::...")
+    print("...::: No se encontro la dependencia TERMCOLOR o simple_term_menu, el programa procedera a instalarlos a continuacion :::...")
     os.system("sudo apt install python3-pip -y")
     os.system("pip3 install termcolor")
-    print("---=== TERMCOLOR INSTALADO ===---")
-    
+    os.system("pip3 install simple_term_menu")
+    print("---=== TERMCOLOR Y SIMPLE MENU INSTALADO ===---")
+    os.system("./script.py")
 
-comandos_primarios  = ["update","upgrade","dist-upgrade"]
-dependencias        = [
+
+comandos_primarios  = {
+    "debian": ["update","upgrade","dist-upgrade"],
+}
+dependencias = [
     "virtualenv",
     "neofetch",
     "cmatrix",
@@ -27,66 +32,35 @@ dependencias        = [
     "htop",
     "openssh-server",
     "openssh-client",
-    "apache2",
-    "python3-pyqt5", 
-    "pyqt5-dev-tools", 
-    "qttools5-dev-tools",
     "nodejs",
     "npm",
     "snapd",
     "wkhtmltopdf",
 ]
+OS_OPTIONS = ["debian", "arch"]
+os_menu = TerminalMenu(OS_OPTIONS, title="Selecciona la base de tu SO")
+OS_OPTION_SELECTED = os_menu.show()
 
-dependencias_pip    = ["pdfkit","wkhtmltopdf"]
-dependencias_snap   = ["flutter","slack","code","google-cloud-sdk", "heroku", "nvim"]
+dependencias_pip    = ["pdfkit", "wkhtmltopdf"]
+dependencias_snap   = ["flutter", "code", "aws-cli", "nvim"]
 folders             = ["custom_path","Proyectos","Sandbox", "Estudios"]
-proyectos_gitHUB    = [
-    "SILISv4", 
-    "creacion",
-    "curso_web",                                #Estudio 
-    "curso_flutter",                            #Estudio
-    "porfolio", 
-    "covid-tracker",    
-    "holbertonschool-zero_day",                 #Estudio
-    "holberton-system_engineering-devops",      #Estudio
-    "holbertonschool-low_level_programming",    #Estudio
-    "holbertonschool-higher_level_programming",   #Estudio
-    "holbertonscript",
-    "libro",
-    "silisweb",
-    "backup-pc"
-]
-
-proyectos_gitLAB    = ["Clicker"]
+proyectos_gitLAB    = ["dashboard-silis-backend", "dashboard-silis-frontend"]
 NAME_USER           = getpass.getuser()
 PROJECTS_PATH       = "/home/{}/Documentos/".format(NAME_USER)
-GIT_USER            = "https://github.com/nikolasribeiro/"
+GIT_USER            = "https://gitlab.com/nicolasribeiro/"
 
 
 def pintar_texto(texto, color="white"):
     return colored(texto, color)
 
 def importar_proyectos(proyecto):
-
     if os.path.exists("/home/{}/Documentos/Proyectos/{}".format(NAME_USER, proyecto)) or os.path.exists("/home/{}/Documentos/Estudios/{}".format(NAME_USER, proyecto)):
         print( pintar_texto("~~ El Proyecto {} ya existe.".format(proyecto), color="red") )
     else:
-        if proyecto in [
-            "curso_web", 
-            "curso_flutter", 
-            "holbertonschool-zero_day", 
-            "holberton-system_engineering-devops", 
-            "holbertonschool-low_level_programming",
-            "holbertonschool-high_level_programming"
-        ]:
-            print( pintar_texto("~~ Descargando: {}".format(proyecto), color="green") )
-            os.system("git clone {}{} {}Estudios/{}".format(GIT_USER, proyecto, PROJECTS_PATH, proyecto))
-        else:
-            print( pintar_texto("~~ Descargando: {}".format(proyecto), color="green") )
-            os.system("git clone {}{} {}Proyectos/{}".format(GIT_USER, proyecto, PROJECTS_PATH, proyecto))
+        print( pintar_texto("~~ Descargando: {}".format(proyecto), color="green") )
+        os.system("git clone {}{} {}Proyectos/{}".format(GIT_USER, proyecto, PROJECTS_PATH, proyecto))
 
 def crear_carpetas(nombre):
-    
     if nombre == "custom_path":
         if os.path.exists("/home/{}/custom_path".format(NAME_USER)):
             print( pintar_texto("La carpeta {} ya existe...".format(nombre), "red") )
@@ -104,9 +78,14 @@ def crear_carpetas(nombre):
             os.system("cp -r {} {}".format(nombre, PROJECTS_PATH) )
             os.system("rmdir {}".format(nombre))
 
-def instalar_dependencia(nombre_dependencia):
-    print( pintar_texto("....:::: Instalando Dependencia: {}".format( colored(nombre_dependencia, 'yellow') ), 'green') )
-    os.system("sudo apt install {} -y".format(nombre_dependencia))
+def instalar_dependencia(os_based, nombre_dependencia):
+    if os_based == "debian":
+        print( pintar_texto("....:::: Instalando Dependencia: {}".format( colored(nombre_dependencia, 'yellow') ), 'green') )
+        os.system("sudo apt install {} -y".format(nombre_dependencia))
+    elif os_based == "arch":
+        print("Elegiste una base de SO aun no soportada...")
+        print(os_based)
+        pass
 
 def instalar_dependencias_pip(dependencia):
     print( pintar_texto("....:::: Instalando Dependencia PIP: {}".format( colored(dependencia, 'yellow') ), 'green') )
@@ -117,10 +96,14 @@ def instalar_dependencia_snap(nombre_dependencia_snap):
     os.system("sudo snap install {} --classic".format(nombre_dependencia_snap))
 
 def actualizar_sistema():
-    for comando in comandos_primarios:
-        os.system("sudo apt {} -y".format(comando))
-    print( pintar_texto("....:::: Removiendo dependencias obsoletas...", "green") )
-    os.system("sudo apt autoremove -y")
+    if OS_OPTIONS[OS_OPTION_SELECTED] == "debian":
+        for comando in comandos_primarios["debian"]:
+            os.system("sudo apt {} -y".format(comando))
+        print( pintar_texto("....:::: Removiendo dependencias obsoletas...", "green") )
+        os.system("sudo apt autoremove -y")
+    elif OS_OPTIONS[OS_OPTION_SELECTED] == "arch":
+        print("Seleccionaste un SO aun no soportado")
+        pass
 
 def exportar_path():
     print( pintar_texto("||>>> Abriendo el archivo bashrc...", color="yellow") )
@@ -137,47 +120,24 @@ neofetch
 
 
 def crear_archivos():
-    code_betty = """ 
-#!/bin/bash
-# Simply a wrapper script to keep you from having to use betty-style
-# and betty-doc separately on every item.
-# Originally by Tim Britton (@wintermanc3r), multiargument added by
-# Larry Madeo (@hillmonkey)
-
-BIN_PATH="/usr/local/bin"
-BETTY_STYLE="betty-style"
-BETTY_DOC="betty-doc"
-
-if [ "$#" = "0" ]; then
-    echo "No arguments passed."
-    exit 1
-fi
-
-for argument in "$@" ; do
-    echo -e "\n========== $argument =========="
-    ${BIN_PATH}/${BETTY_STYLE} "$argument"
-    ${BIN_PATH}/${BETTY_DOC} "$argument"
-done
-    
-"""
 
     if os.path.exists("/home/{}/custom_path".format(NAME_USER)):
-        os.system("touch ~/custom_path/actualizar ~/custom_path/instalar ~/custom_path/betty")
+        os.system("touch ~/custom_path/actualizar ~/custom_path/instalar")
         time.sleep(2)
-
         print( pintar_texto("Creando archivo: {}".format( colored('Actualizar', 'yellow') ), color="green") )
+
         with open("/home/{}/custom_path/actualizar".format(NAME_USER), "w") as actualizar:
-            actualizar.write("sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y")
-            actualizar.close()
+            if OS_OPTIONS[OS_OPTION_SELECTED] == "debian":
+                actualizar.write("sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y")
+                actualizar.close()
+            elif OS_OPTIONS[OS_OPTION_SELECTED] == "arch":
+                print("Seleccionaste un SO aun no soportado")
+                pass
+            
         
         print( pintar_texto("Creando archivo: {}".format( colored('Instalar', 'yellow') ), color="green") )
         with open("/home/{}/custom_path/instalar".format(NAME_USER), "w") as instalar:
             instalar.write("sudo apt install $1 -y")
-        
-        print( pintar_texto("Creando archivo: {}".format( colored('Betty', 'yellow') ), color="green") )
-        with open("/home/{}/custom_path/betty".format(NAME_USER), "w") as betty:
-            betty.write(code_betty)
-
     else:
         print( pintar_texto("No existe la carpeta custom_path, fallo creacion de archivos", color="red") )
 
@@ -189,9 +149,6 @@ done
     print(pintar_texto("Añadiendo permisos de ejecucion a: {}".format( colored('Instalar','yellow') ), color="green"))
     os.system("chmod +x ~/custom_path/instalar")
 
-    #Permisos de ejecucion a betty
-    print(pintar_texto("Añadiendo permisos de ejecucion a: {}".format( colored('Betty','yellow') ), color="green"))
-    os.system("chmod +x ~/custom_path/betty")
 
 def crear_vimrc():
     contenido_vimrc = """
@@ -210,13 +167,6 @@ syntax enable
         vimrc.write(contenido_vimrc)
 
 
-def install_betty_on_system():
-    print(pintar_texto("Instalando betty en el sistema", color="yellow"))
-    os.system("git clone https://github.com/holbertonschool/Betty.git ~/Betty")
-    os.system("sudo /home/{}/Betty/install.sh".format(NAME_USER))
-    print(pintar_texto("Betty instalado correctamente", color="yellow"))
-
-
 def main():
 
     print( pintar_texto("....:::: Actualizando el sistema ::::....", 'yellow') )
@@ -224,33 +174,43 @@ def main():
     print( pintar_texto("....:::: Sistema Actualizado ::::....", 'yellow') )
 
     print( pintar_texto("....:::: Activando el guardado global de credenciales GIT ::::....", 'green') )
-    os.system("git config --global credential.helper store")
-    os.system('git config --global user.email "nikolasribeiro2@outlook.com"')
-    os.system('git config --global user.name "Nicolas Ribeiro"')
+    gitlab_user_email = input("Introduce tu email de gitlab: ")
+    gitlab_user_name  = input("Ingresa tu nombre: ")
+    confirmation_options = ["Si", "No"]
+    confirmation_menu = TerminalMenu(confirmation_options, title="Son estos valores correctos?")
+    print("{0} Estos son los valores ingresados {0}".format("----------"))
+    print("Email: {}\nNombre: {}".format(gitlab_user_email, gitlab_user_name))
+    print("{}".format("-"*54))
+    confirmation_user = confirmation_menu.show()
 
-    
+    if confirmation_options[confirmation_user] == "Si":
+        os.system("git config --global credential.helper store")
+        os.system('git config --global user.email "{}"'.format(gitlab_user_email))
+        os.system('git config --global user.name "{}"'.format(gitlab_user_name))
+        print( pintar_texto("Credenciales almacenadas correctamente...", "green") )
+    else:
+        print("No se han creado las credenciales de git, puedes configurarlas manualmente con el comando: git config.")
+        time.sleep(2)
+
     for carpeta in folders:
         crear_carpetas(carpeta)
 
     for dependencia in dependencias:
-        instalar_dependencia(dependencia)
-    
+        instalar_dependencia(OS_OPTIONS[OS_OPTION_SELECTED], dependencia)
+
     for snap_program in dependencias_snap:
         instalar_dependencia_snap(snap_program)
     
     for pip in dependencias_pip:
         instalar_dependencias_pip(pip)
     
-    for proyecto in proyectos_gitHUB:
+    for proyecto in proyectos_gitLAB:
         importar_proyectos(proyecto)
     print( pintar_texto("~~ Descarga de Repositorios Finalizada ~~", color="green") )
 
     #Creacion del vimrc
     print(pintar_texto("Creando archivo {}".format( colored('vimrc', 'cyan') )))
     crear_vimrc()
-
-    #Instalando Betty en el sistema
-    install_betty_on_system()
 
     print( pintar_texto("..::..//~~ Exportando {} al PATH del sistema ~~//..::..".format( colored('custom_path', 'yellow') ), color="yellow") )
     exportar_path()
@@ -260,17 +220,16 @@ def main():
     crear_archivos()
     print( pintar_texto("..::..//~~ Archivos creados correctamente ~~//..::..", color="green") )
 
-
     #fin del codigo
-    print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )
-    print( pintar_texto("Para aplicar todos los cambios del bashrc, ejecute: source ~/.bashrc", color="white") )
     os.system("source ~/.bashrc")
-    time.sleep(10)
+    os.system("clear")
+    print( pintar_texto("Para aplicar todos los cambios del bashrc, ejecute: source ~/.bashrc", color="white") )
+    print( pintar_texto("---=== Entorno de desarrollo instalado ===---", 'green') )
     sys.exit()
     
 
 def test():
-    install_betty_on_system()
+    pass
 
 if __name__ == "__main__":
     main()
